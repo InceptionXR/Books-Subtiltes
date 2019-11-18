@@ -24,7 +24,7 @@ podTemplate(cloud: 'Bookful Stage', name: name, label: name, containers: [
                         def sourceRepositoryFilePath = it
                         def repositoryName = sourceRepositoryFilePath.split("/")[0]
                         def targetRepositoryFilePath = sourceRepositoryFilePath.replaceAll("${repositoryName}/", "")
-                        if (targetRepositoryFilePath != sourceRepositoryFilePath) {
+                        if (targetRepositoryFilePath != sourceRepositoryFilePath && !targetRepositoryFilePath.contains(".mp3")) {
                             log.info("uploading ${sourceRepositoryFilePath} to ${repositoryName}")
 
                             def uploadUrl = "https://api.github.com/repos/InceptionXR/${repositoryName}/contents/${targetRepositoryFilePath}"
