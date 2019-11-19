@@ -28,7 +28,7 @@ podTemplate(cloud: 'Bookful Stage', name: name, label: name, containers: [
                         if (targetRepositoryFilePath != sourceRepositoryFilePath && !targetRepositoryFilePath.contains(".mp3")) {
                             log.info("uploading ${sourceRepositoryFilePath} to ${repositoryName}")
 
-                            def uploadUrl = URLEncoder.encode("https://api.github.com/repos/InceptionXR/${repositoryName}/contents/${targetRepositoryFilePath}", "UTF-8");
+                            def uploadUrl = "https://api.github.com/repos/InceptionXR/${repositoryName}/contents/${URLEncoder.encode(targetRepositoryFilePath, "UTF-8")}";
                             def fileContent = readFile sourceRepositoryFilePath
                             def content = fileContent.bytes.encodeBase64().toString()
                             def message = "updated by ${JOB_NAME} job, build #${BUILD_NUMBER} [ci] [Books-Subtitles]"
