@@ -22,13 +22,15 @@ podTemplate(cloud: 'Bookful Stage', name: name, label: name, containers: [
                         string(credentialsId: 'GITHUB_API_TOKEN', variable: 'GITHUB_API_TOKEN')
                 ]) {
                     changedFilesPaths.each {
-                        def sourceRepositoryFilePath = it
+                        def sourceRepositoryFilePath = it.split("/").collect {
+                            URLEncoder.encode(it, "UTF-8")
+                        }.join("/")
                         def repositoryName = sourceRepositoryFilePath.split("/")[0]
                         def targetRepositoryFilePath = sourceRepositoryFilePath.replaceAll("${repositoryName}/", "")
                         if (targetRepositoryFilePath != sourceRepositoryFilePath && !targetRepositoryFilePath.contains(".mp3")) {
                             log.info("uploading ${sourceRepositoryFilePath} to ${repositoryName}")
 
-                            def uploadUrl = "https://api.github.com/repos/InceptionXR/${repositoryName}/contents/${URLEncoder.encode(targetRepositoryFilePath, "UTF-8")}";
+                            def uploadUrl = "https://api.github.com/repos/InceptionXR/${repositoryName}/contents/${targetRepositoryFilePath}";
                             def fileContent = readFile sourceRepositoryFilePath
                             def content = fileContent.bytes.encodeBase64().toString()
                             def message = "updated by ${JOB_NAME} job, build #${BUILD_NUMBER} [ci] [Books-Subtitles]"
