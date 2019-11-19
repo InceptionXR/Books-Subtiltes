@@ -1,6 +1,7 @@
 #!groovy
 import groovy.json.JsonSlurperClassic
 
+
 def containerName = "node"
 def name = k8s.normalizeId("ja-unity-${JOB_NAME}".toLowerCase().replace("scan repo", ""))
 
