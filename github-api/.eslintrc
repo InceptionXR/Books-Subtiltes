@@ -1,0 +1,14 @@
+{
+  "extends": ["./node_modules/kcd-scripts/eslint.js"],
+  "rules": {
+    "camelcase": 0,
+    "import/prefer-default-export": 0,
+    "one-var": [2, "never"],
+    // TODO: Fix
+    "jest/no-disabled-tests": 0,
+    "complexity": 0,
+    // KCD incompatibility
+    "max-lines-per-function": 0,
+    "prefer-object-spread": 0
+  }
+}
