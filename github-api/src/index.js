@@ -26,7 +26,7 @@ const run = async (changedFilesPaths, commitMessage) => {
     return;
   }
 
-  logger.info(`filesToUpdate: ${allFilesPath}`);
+  logger.info(`filesToUpdate: ${filesToUpdate}`);
 
   const octokit = new Octokit({ auth: process.env.GITHUB_API_TOKEN });
   const githubApiWrapper = new GithubApiWrapper(octokit);
