@@ -17,7 +17,7 @@ const run = async (changedFilesPaths, commitMessage) => {
       return { repoName, sourceFilePath, targetFilepath };
     })
     .filter((d) => d.sourceFilePath !== d.targetFilepath)
-    .filter((d) => !d.sourceFilePath.endsWith('*.mp3'))
+    .filter((d) => d.sourceFilePath.toLowerCase().endsWith('*.txt'))
     .filter((d) => d.repoName !== 'vars')
     .filter((d) => d.repoName !== 'github-api');
 
