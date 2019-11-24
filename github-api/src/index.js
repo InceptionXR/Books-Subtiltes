@@ -17,6 +17,8 @@ const run = async (changedFilesPaths, commitMessage) => {
       return { repoName, sourceFilePath, targetFilepath };
     })
     .filter((d) => d.sourceFilePath !== d.targetFilepath)
+    .filter((d) => d.sourceFilePath.toLowerCase().endsWith('.txt'))
+    .filter((d) => d.repoName !== 'vars')
     .filter((d) => d.repoName !== 'github-api');
 
   if (filesToUpdate.length === 0) {
@@ -24,7 +26,7 @@ const run = async (changedFilesPaths, commitMessage) => {
     return;
   }
 
-  logger.info(`filesToUpdate: ${allFilesPath}`);
+  logger.info(`filesToUpdate: ${filesToUpdate}`);
 
   const octokit = new Octokit({ auth: process.env.GITHUB_API_TOKEN });
   const githubApiWrapper = new GithubApiWrapper(octokit);

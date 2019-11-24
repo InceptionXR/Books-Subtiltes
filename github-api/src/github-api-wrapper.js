@@ -1,5 +1,3 @@
-const { logger } = require('./logger');
-
 class GithubApiWrapper {
   constructor(octokit) {
     this.octokit = octokit;
@@ -51,8 +49,6 @@ class GithubApiWrapper {
       ref: `heads/master`,
       force: true
     });
-
-    logger.info('Project saved');
   }
 }
 
